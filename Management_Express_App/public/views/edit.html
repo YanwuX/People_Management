@@ -1,0 +1,104 @@
+  <div class="container">
+    <div class="row">
+      <h5 class="col-md-4 col-xs-6">Edit An Employee</h5>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Profile Picture</label>
+        <div ng-model="emps.profilePic"></div>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>First Name</label>
+        <input ng-model="emps.fName">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Last Name</label>
+        <input ng-model="emps.lName">
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Tittle</label>
+        <input ng-model="emps.tittle">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Gender</label>
+        <md-select ng-model="emps.gender">
+          <md-option value="male">Male</md-option>
+          <md-option value="female">Female</md-option>
+          <md-option value="other">Other</md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Age</label>
+        <input ng-model="emps.age">
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm md-on-open="getAvailableManager()">
+        <label>Manager</label>
+        <md-select ng-model="emps.manager">
+          <md-option ng-repeat="amanager in availableManager" value="{{amanager.fName + ' ' + amanager.lName}}">
+            {{amanager.fName + ' ' + amanager.lName}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Home Phone</label>
+        <input ng-model="emps.hPhone">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Work Phone</label>
+        <input ng-model="emps.wPhone">
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Cell Phone</label>
+        <input ng-model="emps.cPhone">
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Email</label>
+        <input ng-model="emps.email">
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Location</label>
+        <input ng-model="emps.location">
+      </md-input-container>
+    </div>
+
+    <div id="dropzone">
+      <form action="...", method="post"  class="dropzone" dropzone="" id="dropzone">
+        <div class="dz-default dz-message">
+          Drop files here or click to upload for Profile Icon.
+        </div>
+      </form>
+    </div>
+    <br>
+    <div class="row">  
+      <a href="#/mainpage/"><button class="col-md-4 col-md-offset-1 col-xs-6 w3-btn w3-green w3-ripple" ng-click="editEmp()" >&#10004; Save Changes</button></a>
+      <a href="#/"><button class="col-md-4 col-md-offset-2 col-xs-6 w3-btn w3-yellow">Cancel</button></a>
+    </div>
+  </div>
+
+

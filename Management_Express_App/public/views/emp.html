@@ -1,0 +1,62 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-default fixedElement" role="navigation" >
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand page-scroll" href="index.html">Management App</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#/create/"><button class="w3-btn w3-green w3-ripple">&#9998; Create New User</button></a>
+                    </li>
+                    <li>
+                      <md-input-container class="md-block" flex-gt-sm>
+                        <label>Search for ... </label>
+                        <input ng-model="searchText">
+                      </md-input-container>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<div class="conatiner">
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <table class="w3-table w3-bordered w3-striped">
+        <tr>
+        <div class="row">
+          <th class="col-md-2 col-xs-2">Profile Picture</th>
+          <th class="col-md-3 col-xs-3" ng-click="sortBy('fName')">First&nbspName<span class="sortorder" ng-show="sortReference === 'fName'" ng-class="{reverse:reverse}"></span></th>
+          <th class="col-md-3 col-xs-3" ng-click="sortBy('lName')">Last&nbspName<span class="sortorder" ng-show="sortReference === 'lName'" ng-class="{reverse:reverse}"></span></th>
+          <th class="col-md-2 col-xs-2" ng-click="sortBy('tittle')">Tittle<span class="sortorder" ng-show="sortReference === 'tittle'" ng-class="{reverse:reverse}"></span></th>
+          <th class="col-md-1 col-xs-1" ng-click="sortBy('dircRept')">Dir&nbspReports<span class="sortorder" ng-show="sortReference === 'dircRept'" ng-class="{reverse:reverse}"></span></th>
+          <th class="col-md-1 col-xs-1">Detials</th>
+        </div>
+        </tr>
+        <tr infinite-scroll='getNext()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' ng-repeat="emp in emps | orderBy: sortReference : reverse | filter : searchText ">
+        <div class="row">
+          <td ng-click="">pic</td>
+          <td>{{ emp.fName }}</td>
+          <td>{{ emp.lName }}</td>
+          <td>{{ emp.tittle }}</td>
+          <td><a href="#/dirReports/{{emp._id}}"><button style="margin-left: 15%" class="btn btn-info"><i class="fa fa-info" aria-hidden="true"></i>{{ emp.getDirReports($scope).length }}</button></a></td>
+          <td><a href="#/edit/{{emp._id}}"><button class="btn btn-info">&#9998; Detials</button></a></td>
+
+        </div>
+        </tr>
+      </table>
+      <div ng-show='busy'>Loading data...</div>
+    </div>
+  </div>
+</div>
+
