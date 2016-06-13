@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var infraFunct = require('../infrastructure/infrastructure')();
 var empData = require('../models/empSchema');
 
 /* GET employees listing. */
@@ -54,7 +53,8 @@ router
             var count = 0;
             for(var i = 0; i < empData.length; i++) {
                 if(empData[i].manager == target || empData[i]._id == target) empData.splice(i ,1);
-                if(!setTimeout(checkAvailablity(empData[i], target), 0)) empData.splice(i,1);
+                // if(!setTimeout(checkAvailablity(empData[i], target), 0)) empData.splice(i,1);
+                if(!checkAvailablity(empData[i], target), 0) empData.splice(i,1);
             }
         };
 
@@ -80,8 +80,8 @@ router
     .put("/emp/:id", function(request, response) {
         console.log("input");
         console.log(request.body);
+        console.log(request.body.manager);
         console.log(request.params.id);
-        console.log(request.params.id.length);
 
         if(request.params.id.length == 9) {
             console.log("in creating new employee...");

@@ -47,7 +47,8 @@
         <input ng-model="emps.age">
       </md-input-container>
       <md-input-container class="md-block" flex-gt-sm>
-        <label>Manager</label>
+        <label ng-show="!hasManager">Manager</label>
+        <label ng-show="hasManager" >{{emps.manager.fName + " " + emps.manager.lName}}</label>
         <md-select ng-model="emps.manager" md-on-open="getAvailableManager(emps._id)">
           <md-option ng-repeat="amanager in availableManagers" value="{{amanager._id}}">
             {{amanager.fName + ' ' + amanager.lName + ' ' + amanager._id}}
@@ -96,8 +97,9 @@
     </div>
     <br>
     <div class="row">  
-      <a href="#/mainpage/"><button class="col-md-4 col-md-offset-1 col-xs-6 w3-btn w3-green w3-ripple" ng-click="editEmp()" >&#10004; Save Changes</button></a>
-      <a href="#/"><button class="col-md-4 col-md-offset-2 col-xs-6 w3-btn w3-yellow">Cancel</button></a>
+      <a href="#/mainpage/"><button class="col-md-4  col-xs-4 w3-btn w3-green w3-ripple" ng-click="editEmp()" >&#10004; Save Changes</button></a>
+      <a href="#/mainpage/"><button class="col-md-4  col-xs-4 w3-btn w3-red" ng-click="deleteEmp()">Delete</button></a>
+      <a href="#/"><button class="col-md-4 col-xs-4 w3-btn w3-yellow">Cancel</button></a>
     </div>
   </div>
 

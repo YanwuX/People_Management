@@ -3,7 +3,6 @@ var express = require('express');        // call express
 var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
-var infraFunct = require('./infrastructure/infrastructure')();
 var empRouter = require('./routes/emp');
 
 var app = express();                 // define our app using express

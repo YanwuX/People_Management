@@ -39,7 +39,6 @@ app.controller('empCtrl', ['$scope', 'myService', function($scope, myService) {
 
   $scope.getDirReports = function(id) {
     console.log("getting dirReports");
-    console.log(id);
     myService.getDirReports(id);
   };
 
@@ -54,7 +53,6 @@ app.controller('createCtrl', function($scope, myService) {
 
   $scope.createEmp = function(){
     console.log("createUser");
-    console.log($scope);
     myService.updateEmp($scope);
   };
 
@@ -79,6 +77,8 @@ app.controller('editCtrl', function($scope, $routeParams, myService) {
   $scope.id = $routeParams.id;
   myService.getEmpById($scope);
 
+  $scope.hasManager = false;
+
   $scope.editEmp = function () {
     console.log("in editUser");
     console.log($scope);
@@ -91,9 +91,9 @@ app.controller('editCtrl', function($scope, $routeParams, myService) {
     myService.getAvailableManager(id, $scope);
   };
 
-  $scope.deleteEmp = function(id){
-    myService.deleteEmp(id, $scope);
-    // myService.getEmp($scope);
+  $scope.deleteEmp = function(){
+    console.log("in deleteEmp");
+    myService.deleteEmp($scope.emps._id);
   };
 
 

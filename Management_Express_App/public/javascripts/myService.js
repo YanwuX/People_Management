@@ -19,6 +19,16 @@ app.service('myService', function ($http) {
 		$http.get("API/emp/" + $scope.id)
           .then(function(response) {
               $scope.emps = response.data;
+
+              	$http.get("API/emp/" + $scope.emps.manager)
+		          .then(function(response) {
+		              $scope.emps.manager = response.data;
+		              if(response.data != undefined) $scope.hasManager = true;
+		      	}, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				});
+
       	}, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -72,7 +82,7 @@ app.service('myService', function ($http) {
 				    // or server returns response with an error status.
 				});
               });
-              
+
       	}, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
@@ -91,10 +101,34 @@ app.service('myService', function ($http) {
 		});
 	};
 
-	this.deleteEmp = function(id, $scope) {
+	this.deleteEmp = function(id) {
+		console.log("in service deleteEmp");
+		console.log(id);
+
 		$http.delete("API/emp/" + id)
-		   .then(function(err) {
+		   .then(function(response) {
+		   		console.log(response);
 		   		// error handling
+
+		   		$http.get("API/emp/" + id + "/dirReports/")
+		          .then(function(response) {
+		              response.data.forEach(function(emp) {
+		              	var updates = { manager : "not assigned" };
+		              	console.log(updates);
+		              	$http.put('API/emp/' + emp._id, updates)
+							.then(function(response) {
+								console.log("updated dirReports employees");
+							}, function errorCallback(response) {
+						    // called asynchronously if an error occurs
+						    // or server returns response with an error status.
+						});
+		              });
+
+		      	}, function errorCallback(response) {
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				});
+
 		    }, function errorCallback(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.

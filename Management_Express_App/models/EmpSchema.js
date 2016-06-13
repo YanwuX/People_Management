@@ -8,7 +8,7 @@ var empSchema   = new Schema({
   	age: { type: Number, min: 0 },
   	tittle: String,
   	gender: String,
-  	manager: String,
+  	manager: {type:String, default: "not assigned"},
 
   		location: String,
   		homePhone: { type: String, trim: true }, 
