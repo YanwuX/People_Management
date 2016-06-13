@@ -10,18 +10,13 @@ var empSchema   = new Schema({
   	gender: String,
   	manager: String,
 
-  	// contactInfo: {
-  	// 	location: String,
-  	// 	homePhone: { type: String, trim: true }, 
-  	// 	workPhone: { type: String, trim: true },
-  	// 	cellPhone: { type: String, trim: true },
-  	// 	email: { type: String, lowercase: true, trim: true }
-  	// 	},
   		location: String,
   		homePhone: { type: String, trim: true }, 
   		workPhone: { type: String, trim: true },
   		cellPhone: { type: String, trim: true },
   		email: { type: String, lowercase: true, trim: true },
+
+  		// dirReports: [String],
 
   	startDate: { type: Date, default: Date.now },
   	profilePic: String,

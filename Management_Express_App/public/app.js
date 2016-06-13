@@ -1,2 +1,2 @@
-var app = angular.module('myApp', ['ngRoute', 'ngMaterial']);
-// 'infinite-scroll', 
+var app = angular.module('myApp', ['ngRoute', 'infinite-scroll', 'ngMaterial']);
+// , 

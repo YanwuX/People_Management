@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var infraFunct = require('../infrastructure/infrastructure')();
+// var infraFunct = require('../infrastructure/infrastructure')();
 var empData = require('../models/empSchema');
 
 /* GET employees listing. */
@@ -38,31 +38,34 @@ router
         console.log(id);
         empData.find(id)
             .sort({ "_id": -1 })
-            .limit(15)
+            .limit(10)
             .exec(function(err, empData) {
-                // id = docs.slice(-1).id;
                 response.json(empData);
-            });
+        });
     }) 
     .get("/emp/:id/managers/", function(request, response) {
         console.log("getting available reassign managers");
-        
-        var currManagers;
-        var availManager;
+        console.log(request.params.id);
 
-        empData.find({manager : request.params.id}, function(err, empData) {
+        empData.find(function(err, empData) {
             if (err)
                 response.send(err);
+        var getAvailableManager = function (empData, target) {
+            var count = 0;
+            for(var i = 0; i < empData.length; i++) {
+                if(empData[i].manager == target || empData[i]._id == target) empData.splice(i ,1);
+                if(!setTimeout(checkAvailablity(empData[i], target), 0)) empData.splice(i,1);
+            }
+        };
 
-                currManagers = empData;
-
-            empData.find(function(err, allEmp) {
-                if (err)
-                    response.send(err);
-                availManager = allEmp;
-            });
-
-        response.json(getAvailableManager(availManager, currManagers));
+        var checkAvailablity = function(emp, target) {
+            if(emp == undefined) return true;
+            if(emp.manager == target) return false;
+            else checkAvailablity(emp.manager, target);
+        };
+        getAvailableManager(empData, request.params.id);
+        // console.log(empData);
+        response.json(empData);
         });
     })
     .get("/emp/:id/dirReports/", function(request, response) {

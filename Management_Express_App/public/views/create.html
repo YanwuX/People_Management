@@ -38,11 +38,11 @@
         <label>Age</label>
         <input ng-model="age">
       </md-input-container>
-      <md-input-container class="md-block" flex-gt-sm md-on-open="getAvailableManager()">
+      <md-input-container class="md-block" flex-gt-sm>
         <label>Manager</label>
-        <md-select ng-model="manager">
-          <md-option ng-repeat="amanager in availableManager" value="{{amanager.fName + ' ' + amanager.lName}}">
-            {{amanager.fName + ' ' + amanager.lName}}
+        <md-select ng-model="emps.manager" md-on-open="getAvailableManager(emps._id)">
+          <md-option ng-repeat="amanager in availableManagers" value="{{amanager._id}}">
+            {{amanager.fName + ' ' + amanager.lName + ' ' + amanager._id}}
           </md-option>
         </md-select>
       </md-input-container>
