@@ -19,7 +19,7 @@ var empSchema   = new Schema({
   		// dirReports: [String],
 
   	startDate: { type: Date, default: Date.now },
-  	profilePic: String,
+	profilePic: { type: String, default: '575f947e28c38e441ec233e9'},
   	avalMang: { type: Boolean, default: true }
 });
 

@@ -9,7 +9,7 @@
     <div layout-gt-sm="row">
       <md-input-container class="md-block" flex-gt-sm>
         <label>Profile Picture</label>
-        <div ng-model="emps.profilePic"></div>
+        <div ng-model="emps.profilePic"><img ng-src="{{'IMG/download/' + emps.profilePic}}"></div>
       </md-input-container>
     </div>
 
@@ -88,13 +88,27 @@
       </md-input-container>
     </div>
 
-    <div id="dropzone">
+<!--     <div id="dropzone">
       <form action="...", method="post"  class="dropzone" dropzone="" id="dropzone">
         <div class="dz-default dz-message">
           Drop files here or click to upload for Profile Icon.
         </div>
       </form>
-    </div>
+    </div> -->
+    <form name="myForm" id="myForm" enctype="multipart/form-data" ng-submit="upLoadImg(croppedDataUrl, emps._id)">
+        <div>Crop Image and Upload</div>
+        <button ngf-select ng-model="picFile" accept="image/*">
+            Select Picture</button>
+        <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+            <img-crop image="picFile  | ngfDataUrl"
+            result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+            </img-crop>
+        </div>
+        <div>
+            <img ng-src="{{croppedDataUrl}}" />
+        </div>
+        <button id="addLogo" ng-submit="upLoadImg(croppedDataUrl, emps._id)">Add Logo</button>
+    </form>
     <br>
     <div class="row">  
       <a href="#/mainpage/"><button class="col-md-4  col-xs-4 w3-btn w3-green w3-ripple" ng-click="editEmp()" >&#10004; Save Changes</button></a>

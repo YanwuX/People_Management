@@ -2,8 +2,11 @@
 var express = require('express');        // call express
 var bodyParser = require('body-parser');
 var path = require('path');
+var multer = require('multer');
+
 var mongoose = require('mongoose');
 var empRouter = require('./routes/emp');
+// var imgRouter = require('./routes/image');
 
 var app = express();                 // define our app using express
 
@@ -42,6 +45,41 @@ var router = express.Router();
 // // REGISTER OUR ROUTES -------------------------------
 // // all of our routes will be prefixed with /api
 app.use('/API', empRouter);
+app.use('/IMG', router);
+
+var storage = multer.diskStorage({
+    destination: function(req, res, cb) {
+        cb(null, 'public/images/')
+    },
+    filename: function(req, res, cb) {
+        cb(null, req.params.id)
+    }
+});
+
+var uploading = multer({
+    storage: storage
+});
+
+
+router.route('/upload/:id')
+    .post(uploading.single('file'), function(req, res) {
+        console.log('image uploaded');
+        // sharp(path.join(__dirname, 'public/uploads/', req.params.user_id + 'old')).resize(150, 200).crop(sharp.gravity.centre).toFile(path.join(__dirname, 'public/uploads/', req.params.user_id), function(err) {
+        //     if (err) {
+        //         throw err;
+        //     }
+        //     // output.jpg is a 300 pixels wide and 200 pixels high image
+        //     // containing a scaled and cropped version of input.jpg
+
+        // });
+    });
+
+router.route('/download/:id')
+    .get(function(req, res) {
+        console.log('image downloaded');
+        res.sendFile(path.join(__dirname, '/public/images/', req.params.id));
+    });
+
 
 // START THE SERVER
 // =============================================================================

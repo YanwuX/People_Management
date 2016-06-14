@@ -53,8 +53,8 @@ router
             var count = 0;
             for(var i = 0; i < empData.length; i++) {
                 if(empData[i].manager == target || empData[i]._id == target) empData.splice(i ,1);
-                // if(!setTimeout(checkAvailablity(empData[i], target), 0)) empData.splice(i,1);
-                if(!checkAvailablity(empData[i], target), 0) empData.splice(i,1);
+                if(!setTimeout(checkAvailablity(empData[i], target), 0)) empData.splice(i,1);
+                // if(!checkAvailablity(empData[i], target), 0) empData.splice(i,1);
             }
         };
 

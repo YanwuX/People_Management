@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['ngRoute', 'infinite-scroll', 'ngMaterial']);
+var app = angular.module('myApp', ['ngRoute', 'infinite-scroll', 'ngMaterial', 'ngFileUpload', 'ngImgCrop']);

@@ -19,6 +19,7 @@ app.service('myService', function ($http) {
 		$http.get("API/emp/" + $scope.id)
           .then(function(response) {
               $scope.emps = response.data;
+              if($scope.emps.manager == 'not assigned') return;
 
               	$http.get("API/emp/" + $scope.emps.manager)
 		          .then(function(response) {
@@ -140,7 +141,7 @@ app.service('myService', function ($http) {
 		console.log($scope);
 
 		var data = {
-				_id: ($scope.id) ? $scope.id : undefined,
+				// _id: ($scope.id) ? $scope.id : undefined,
 	            fName : $scope.emps.fName, 
 	            lName : $scope.emps.lName, 
 	            tittle : $scope.emps.tittle,
@@ -164,6 +165,28 @@ app.service('myService', function ($http) {
 		    // or server returns response with an error status.
 		});
 	};	
+
+    this.upLoadImg = function(img, id, $scope) {
+        var formData = new FormData();
+        formData.append("file", img);
+        var url = 'IMG/upload/' + id;
+
+        var data = { profilePic : id };
+        console.log('in service upLoadImg');
+        console.log(data);
+		$http.put('API/emp/' + id, data)
+			.then(function(response) {
+				$scope.emps.profilePic = response.data;
+			}, function errorCallback(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		});
+
+        $http.post(url, formData, {
+            headers: {'Content-Type': undefined},
+            transformRequest: angular.identity
+        });
+    };
 
 	this.test = function($scope) {
     	if ($scope.passw1 !== $scope.passw2) {

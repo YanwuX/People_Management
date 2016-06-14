@@ -60,20 +60,27 @@ app.controller('createCtrl', function($scope, myService) {
     myService.getAvailableManager(id, $scope);
   };
 
-  $scope.partialDownloadLink = 'http://localhost:8888/download?filename=';
-  $scope.filename = '';
-
-  $scope.uploadFile = function() {
-      $scope.processQueue();
+  $scope.upLoadImg = function(dataUrl, id) {
+    console.log('in uploadLogo');
+      var file = Upload.dataUrltoBlob(dataUrl, 'image');
+      myService.upLoadImg(file, id);
+      // return myService.getUsers($scope);
   };
 
-  $scope.reset = function() {
-      $scope.resetDropzone();
-  };
+  // $scope.partialDownloadLink = 'http://localhost:8888/download?filename=';
+  // $scope.filename = '';
+
+  // $scope.uploadFile = function() {
+  //     $scope.processQueue();
+  // };
+
+  // $scope.reset = function() {
+  //     $scope.resetDropzone();
+  // };
 
 });
 
-app.controller('editCtrl', function($scope, $routeParams, myService) {
+app.controller('editCtrl', function($scope, $routeParams, myService, Upload) {
   $scope.id = $routeParams.id;
   myService.getEmpById($scope);
 
@@ -96,17 +103,23 @@ app.controller('editCtrl', function($scope, $routeParams, myService) {
     myService.deleteEmp($scope.emps._id);
   };
 
-
-  $scope.partialDownloadLink = 'http://localhost:8888/download?filename=';
-  $scope.filename = '';
-
-  $scope.uploadFile = function() {
-      $scope.processQueue();
+  $scope.upLoadImg = function(dataUrl, id) {
+    console.log('in uploadLogo');
+      var file = Upload.dataUrltoBlob(dataUrl, 'image');
+      myService.upLoadImg(file, id, $scope);
+      // return myService.getUsers($scope);
   };
 
-  $scope.reset = function() {
-      $scope.resetDropzone();
-  };
+  // $scope.partialDownloadLink = 'http://localhost:8888/download?filename=';
+  // $scope.filename = '';
+
+  // $scope.uploadFile = function() {
+  //     $scope.processQueue();
+  // };
+
+  // $scope.reset = function() {
+  //     $scope.resetDropzone();
+  // };
 
 });
 
